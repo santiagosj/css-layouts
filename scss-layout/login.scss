@@ -1,0 +1,105 @@
+@import "../../index";
+
+#login {
+  @include flexbox();
+  width : 100vw;
+  height: 100vh;
+
+  input,
+  img {
+    width: 20rem;
+  }
+
+  img {
+    margin-bottom: 5rem;
+  }
+
+  input,
+  select {
+    margin-bottom: 2rem;
+    width        : 20rem;
+    height       : 3rem;
+    font-size    : 1.5rem;
+    z-index      : 1;
+  }
+
+  button {
+    @include toon();
+    width         : 20rem;
+    height        : 3rem;
+    padding       : 1rem;
+    font-size     : 1.2rem;
+    font-weight   : unset;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    box-shadow    : 0px 2px 5px 0px $sombra;
+
+    &:hover {
+      letter-spacing: 0.5rem;
+    }
+
+    #loading_spinner {
+      @include loading_spinner(1rem, $negro, $opaco, unset);
+    }
+  }
+
+  form {
+    select {
+      border-bottom: 1px solid #292933;
+      margin: 0 0 2rem 0;
+      position: relative;
+      top: -3rem;
+    }
+
+    p {
+      text-align: center;
+      color: red;
+      margin: 0 0 2rem 0;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    %label_arriba {
+      font-size: 0.8rem;
+      top      : -6rem;
+    }
+
+    .label_arriba {
+      @extend %label_arriba;
+    }
+
+    input:focus {
+      +label {
+        @extend %label_arriba;
+        @include toon();
+      }
+    }
+
+    input:invalid {
+      @include toon();
+
+      +label {
+        @include toon();
+      }
+    }
+
+    input:last-child {
+      margin: 0;
+    }
+
+    label {
+      align-self: flex-start;
+      position  : relative;
+      top       : -4rem;
+      font-size : 1.2rem;
+      z-index   : 0;
+      height    : 2rem;
+    }
+
+    >p:last-child {
+      color        : $rojo;
+      font-size    : 1.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+}

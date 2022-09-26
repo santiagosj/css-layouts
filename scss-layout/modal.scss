@@ -1,0 +1,269 @@
+@import "../../index";
+
+#modal {
+  @include flexbox();
+  position  : fixed;
+  top       : 0;
+  left      : 0;
+  width     : 100%;
+  height    : 100vh;
+  visibility: hidden;
+  z-index   : 10;
+
+  #loading_spinner {
+    @include loading_spinner();
+  }
+
+  >div {
+    @include flexbox(flex-start, flex-start);
+    @include toon();
+    @extend %sombra;
+    background   : white;
+    width        : 86vh;
+    padding      : 0 1rem 1rem 1rem;
+    border-radius: $esquina;
+    overflow-y   : hidden;
+
+    #modal_tabs {
+      @include flexbox(space-between, center, row);
+      width: 100%;
+
+      >div:first-child {
+        flex-direction: row;
+        width         : 100%;
+        height        : $icono;
+        border-bottom : 1px solid $opaco;
+        margin-top    : 1rem;
+
+        div {
+          @include flexbox(center, center);
+          cursor        : pointer;
+          min-width     : 25%;
+          position      : relative;
+          top           : 1px;
+          font-weight   : bold;
+          text-transform: uppercase;
+
+          &:hover {
+            background   : $blanco;
+            border-bottom: 1px solid $opaco;
+          }
+        }
+      }
+
+      >div:last-child {
+        align-items: flex-end;
+
+        svg {
+          cursor       : pointer;
+          width        : $icono;
+          height       : $icono + 1rem;
+          fill         : $gris;
+          border-bottom: 1px solid $opaco;
+
+          &:hover {
+            fill: $resaltado;
+          }
+        }
+      }
+    }
+
+    #detail,
+    #documentation,
+    #related {
+      width     : 100%;
+      height    : 100%;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width : 0.5rem;
+        height: 0.5rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background   : $opaco;
+        border-radius: $esquina;
+      }
+
+      &::-webkit-scrollbar-thumb:active {
+        background-color: red;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: $resaltado;
+      }
+
+      /* Estilos track de scroll */
+      &::-webkit-scrollbar-track {
+        background   : $blanco;
+        border-radius: $esquina;
+      }
+
+      &::-webkit-scrollbar-track:hover,
+      &::-webkit-scrollbar-track:active {
+        background: $blanco;
+      }
+
+      #modal_header {
+        @include flexbox(space-between, center, row);
+        width        : 100%;
+        margin-bottom: 1rem;
+        padding-top  : 1rem;
+
+        >div {
+          width: 25%;
+        }
+
+        >div:first-child {
+          @include flexbox(flex-start, flex-start, column);
+          width: 100%;
+
+          >div {
+            @include flexbox($dir:row);
+
+            >h1 {
+              font-size: 1.5rem;
+            }
+
+            >p {
+              text-transform: uppercase;
+              font-style    : italic;
+              margin-left   : .5rem;
+              color         : $grisc;
+            }
+          }
+
+          >span {
+            @include flexbox;
+            border-radius   : $esquina_tag;
+            padding         : .25rem 1rem;
+            margin          : .75rem 0 .5rem 0;
+            background-color: $resaltado;
+            font-size       : $b;
+            color           : white;
+            cursor          : unset;
+          }
+        }
+
+        >div:nth-child(2) {
+          @include flexbox(center, center, row);
+
+          span {
+            min-width : 4rem;
+            margin    : 0 0.5rem 0 0;
+            background: $gris;
+            height    : 0;
+          }
+
+          p {
+            text-transform: uppercase;
+            font-weight   : bold;
+          }
+        }
+      }
+
+      #modal_data {
+        @include flexbox(center, flex-start, row);
+        width        : 100%;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid $opaco;
+
+        >div {
+          @include flexbox(center, flex-start);
+          width: 50%;
+
+          >div {
+            @include flexbox(center, flex-start, row);
+            margin-bottom: .75rem;
+
+            p {
+              margin-left: 0.25rem;
+              font-weight: normal;
+              color      : $grisc;
+            }
+          }
+        }
+
+        >div:last-child {
+          @include flexbox(flex-end, flex-start, row);
+          align-self: flex-end;
+          margin    : 1rem;
+
+          >button {
+            @include boton_secundario;
+          }
+        }
+      }
+
+      #modal_main {
+        @include flexbox(flex-start, center, row);
+        flex-wrap    : wrap;
+        margin-bottom: 1rem;
+
+        >img,
+        svg,
+        embed {
+          width : 2rem;
+          height: 2rem;
+        }
+
+        >h1 {
+          margin-left   : 0.5rem;
+          text-transform: uppercase;
+          max-width     : 90%;
+        }
+
+        >p {
+          width     : 100%;
+          margin    : 1rem 0;
+          text-align: justify;
+          color     : $grisc;
+        }
+      }
+
+      #modal_table {
+        #tickets_table {
+          >table {
+            @include table ($bch: white, $bcb:white);
+          }
+        }
+      }
+
+      #modal_resolution {
+        @include flexbox(flex-start, flex-start, row);
+
+        >div {
+          @include flexbox(space-between);
+          width     : 6rem;
+          min-height: 3rem;
+
+          >h3 {
+            text-transform: uppercase;
+            font-weight   : bold;
+          }
+
+          >div {
+            @include flexbox;
+            border-radius   : $esquina_tag;
+            padding         : .25rem 2rem;
+            background-color: $resaltado;
+            font-size       : $b;
+            color           : white;
+            cursor          : unset;
+          }
+        }
+
+        >p {
+          min-height : 6rem;
+          margin-left: 1rem;
+          text-align : justify;
+          color      : $grisc;
+        }
+      }
+    }
+  }
+}
+
+.shadow {
+  @extend %modal_shadow;
+}
